@@ -3,7 +3,7 @@ from discord.ext import commands
 from src.scripts.client._class import Cli
 
 def main():
-    client = Cli() # commands.Bot(command_prefix = "-")
+    client = Cli()
 
     @client.event
     async def on_ready():
