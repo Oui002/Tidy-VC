@@ -11,4 +11,4 @@ def main():
 
     client.print_config()
 
-    client.run("OTU0NDg2ODAwNzU4NDg5MTMw.YjT1Gg.zpq7t-uzjuU47vjTSWQmV_FmVJk")
+    client.run(client.token)
