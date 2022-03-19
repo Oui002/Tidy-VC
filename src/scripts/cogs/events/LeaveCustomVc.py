@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+from src.scripts.utils.new_owner import new_owner
+
 class LeaveCustomVc(commands.Cog):
 
     def __init__(self, client) -> None:
@@ -19,6 +21,11 @@ class LeaveCustomVc(commands.Cog):
                         await before.channel.delete()
 
                         self.client.VoiceChannels[guild.id].pop(before.channel.id)
+
+                    else:
+                        if member.id == self.client.VoiceChannels[guild.id][before.channel.id]["owner"]:
+                            try:self.client.VoiceChannels[guild.id][before.channel.id]["owner"] = new_owner(before.channel).id
+                            except: await before.channel.delete()
 
             except KeyError:
                 pass
