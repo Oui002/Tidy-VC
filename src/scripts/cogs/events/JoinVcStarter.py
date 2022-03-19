@@ -14,11 +14,12 @@ class JoinVcStarter(commands.Cog):
 
             if channel.id == 954509385059688509:
                 new_channel = await channel.category.create_voice_channel(name="unnamed-voicechannel")
-                await member.move_to(channel=new_channel)
 
                 try: self.client.VoiceChannels[guild_id]
                 except KeyError: self.client.VoiceChannels[guild_id] = []; 
                 guild_vc_list: list = self.client.VoiceChannels[guild_id]; guild_vc_list.append(new_channel.id); self.client.VoiceChannels[guild_id] = guild_vc_list
+                
+                await member.move_to(channel=new_channel)
 
 def setup(client: commands.Bot):
     client.add_cog(JoinVcStarter(client=client))
