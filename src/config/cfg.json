@@ -1,3 +1,4 @@
 {
-    "command_prefix": "-"
+    "command_prefix": "-",
+    "client_token": "TOKEN_HERE"
 }
