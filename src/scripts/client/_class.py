@@ -1,16 +1,22 @@
+from discord import Intents
 from discord.ext import commands
 
 from os import listdir
 
-from json import load
+from json import dumps, load
 
 class Cli(commands.Bot):
     
     def __init__(self) -> None:
-        self.config = self.load_config()
-        super().__init__(command_prefix=self.config["command_prefix"])
+        intents = Intents.default()
+        intents.message_content=True
+        intents.members=True
 
+        self.config = self.load_config()
+        super().__init__(command_prefix=self.config["command_prefix"], intents=intents)
         self.token = self.config["client_token"]
+        self.load_vc_starters()
+
         self.VoiceChannels = {}
         
     def load_config(self) -> object:
@@ -18,6 +24,14 @@ class Cli(commands.Bot):
             config = load(fo)
         
         return config
+    
+    def load_vc_starters(self) -> None:
+        with open("./src/config/VCStarters.json") as fo:
+            self.VCStarterChannels = load(fo)
+    
+    def save_vc_starters(self) -> None:
+        with open("./src/config/VCStarters.json", "w") as fo:
+            fo.write(dumps(self.VCStarterChannels))
     
     def load_cogs(self) -> None:
         for folder in listdir("./src/scripts/cogs"):
