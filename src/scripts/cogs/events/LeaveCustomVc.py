@@ -9,14 +9,16 @@ class LeaveCustomVc(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
         if before.channel != None:
-            try:
-                guild_vc_list: list = self.client.VoiceChannels[before.channel.guild.id]
+            guild: discord.Guild = member.guild
 
-                if before.channel.id in guild_vc_list:
+            try:
+                vc_list: list = list(self.client.VoiceChannels[guild.id].keys())
+
+                if before.channel.id in vc_list:
                     if len(before.channel.members) <= 0:
                         await before.channel.delete()
 
-                        guild_vc_list.remove(before.channel.id); self.client.VoiceChannels[before.channel.guild.id] = guild_vc_list
+                        self.client.VoiceChannels[guild.id].pop(before.channel.id)
 
             except KeyError:
                 pass

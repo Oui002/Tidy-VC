@@ -20,9 +20,10 @@ class JoinVcStarter(commands.Cog):
                 new_channel = await channel.category.create_voice_channel(name="unnamed-voicechannel")
 
                 try: self.client.VoiceChannels[guild_id]
-                except KeyError: self.client.VoiceChannels[guild_id] = []; 
-                guild_vc_list: list = self.client.VoiceChannels[guild_id]; guild_vc_list.append(new_channel.id); self.client.VoiceChannels[guild_id] = guild_vc_list
+                except KeyError: self.client.VoiceChannels[guild_id] = {}; 
 
+                self.client.VoiceChannels[guild_id] = {new_channel.id: {"owner": member.id}}
+                
                 await member.move_to(channel=new_channel)
 
 def setup(client: commands.Bot):
