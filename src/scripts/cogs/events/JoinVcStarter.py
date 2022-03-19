@@ -7,16 +7,18 @@ class JoinVcStarter(commands.Cog):
         self.client = client
     
     @commands.Cog.listener()
-    async def on_voice_state_update(self, member: discord.Member, before, after):
+    async def on_voice_state_update(self, member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
         if before.channel is None and after.channel is not None:
             channel: discord.VoiceChannel = member.voice.channel
+            guild_id: int = channel.guild.id
 
-            if channel.id == 954509385059688509: # per server defined channel ID
+            if channel.id == 954509385059688509:
                 new_channel = await channel.category.create_voice_channel(name="unnamed-voicechannel")
-                # for simplicity sake, aka my brain for right now it'll work like this as it's still in testing and I'm lazy.
-                self.client.current_vc = new_channel.id # later this might be an ID that could be converted to a channel object because storing a whole class takes up me memory mate.
-
                 await member.move_to(channel=new_channel)
+
+                try: self.client.VoiceChannels[guild_id]
+                except KeyError: self.client.VoiceChannels[guild_id] = []; 
+                guild_vc_list: list = self.client.VoiceChannels[guild_id]; guild_vc_list.append(new_channel.id); self.client.VoiceChannels[guild_id] = guild_vc_list
 
 def setup(client: commands.Bot):
     client.add_cog(JoinVcStarter(client=client))

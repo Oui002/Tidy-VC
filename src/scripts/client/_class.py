@@ -11,7 +11,7 @@ class Cli(commands.Bot):
         super().__init__(command_prefix=self.config["command_prefix"])
 
         self.token = self.config["client_token"]
-        self.current_vc = None
+        self.VoiceChannels = {}
         
     def load_config(self) -> object:
         with open("./src/config/cfg.json", "r+") as fo:
