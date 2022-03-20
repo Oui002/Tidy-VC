@@ -13,7 +13,6 @@ class SetVoiceChannelLimit(commands.Cog):
         if isinstance(caller.voice.channel, discord.VoiceChannel):
             channel: discord.VoiceChannel = caller.voice.channel
 
-            print(self.client.VoiceChannels)
             if channel.id in list(self.client.VoiceChannels[ctx.guild.id].keys()):
                 if caller.id == self.client.VoiceChannels[ctx.guild.id][channel.id]["owner"]:
                     if value > 99:
