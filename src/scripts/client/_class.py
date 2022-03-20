@@ -16,8 +16,6 @@ class Cli(commands.Bot):
         super().__init__(command_prefix=self.config["command_prefix"], intents=intents)
         self.token = self.config["client_token"]
         self.load_vc_starters()
-
-        self.VoiceChannels = {}
         
     def load_config(self) -> object:
         with open("./src/config/cfg.json", "r+") as fo:
@@ -38,3 +36,9 @@ class Cli(commands.Bot):
             for cog_file in listdir(f"./src/scripts/cogs/{folder}"):
                 if cog_file.endswith(".py"):
                     self.load_extension(f"src.scripts.cogs.{folder}.{cog_file[:-3]}")
+    
+    def _VoiceChannels(self, client) -> None:
+        self.VoiceChannels = {}
+        
+        for guild in client.guilds:
+            self.VoiceChannels[guild.id] = {}
