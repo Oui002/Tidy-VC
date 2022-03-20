@@ -17,12 +17,12 @@ class JoinVcStarter(commands.Cog):
             self.client.save_vc_starters()
 
             if channel.id == int(self.client.VCStarterChannels[str(guild_id)]):
-                new_channel = await channel.category.create_voice_channel(name="unnamed-voicechannel")
+                new_channel = await channel.category.create_voice_channel(name=f"{member.name}'s VC")
 
                 try: self.client.VoiceChannels[guild_id]
                 except KeyError: self.client.VoiceChannels[guild_id] = {}; 
 
-                self.client.VoiceChannels[guild_id] = {new_channel.id: {"owner": member.id}}
+                self.client.VoiceChannels[guild_id].update({new_channel.id: {"owner": member.id}})
                 
                 await member.move_to(channel=new_channel)
 
