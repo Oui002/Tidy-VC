@@ -18,10 +18,11 @@ class LeaveCustomVc(commands.Cog):
 
                 if before.channel.id in vc_list:
                     if len(before.channel.members) <= 0:
-                        await before.channel.delete()
+                        try: await before.channel.delete() 
+                        except discord.errors.NotFound: pass
 
                         self.client.VoiceChannels[guild.id].pop(before.channel.id)
-
+                        
                     else:
                         if member.id == self.client.VoiceChannels[guild.id][before.channel.id]["owner"]:
                             try:self.client.VoiceChannels[guild.id][before.channel.id]["owner"] = new_owner(before.channel).id

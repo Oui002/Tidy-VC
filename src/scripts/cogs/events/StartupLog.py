@@ -1,6 +1,6 @@
 from discord.ext import commands
 
-class Startup(commands.Cog):
+class StartupLog(commands.Cog):
 
     def __init__(self, client) -> None:
         self.client = client
@@ -15,4 +15,4 @@ class Startup(commands.Cog):
 
 
 def setup(client: commands.Bot):
-    client.add_cog(Startup(client=client))
+    client.add_cog(StartupLog(client=client))

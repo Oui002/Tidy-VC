@@ -8,6 +8,8 @@ from json import dumps, load
 class Cli(commands.Bot):
     
     def __init__(self) -> None:
+        self.load_vc_starters()
+        
         intents = Intents.default()
         intents.message_content=True
         intents.members=True
@@ -15,7 +17,6 @@ class Cli(commands.Bot):
         self.config = self.load_config()
         super().__init__(command_prefix=self.config["command_prefix"], intents=intents)
         self.token = self.config["client_token"]
-        self.load_vc_starters()
         
     def load_config(self) -> object:
         with open("./src/config/cfg.json", "r+") as fo:

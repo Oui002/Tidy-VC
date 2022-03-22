@@ -1,5 +1,3 @@
-from discord.ext import commands
-
 from src.scripts.client._class import Cli
 
 def main():
