@@ -9,6 +9,10 @@ class Mute(commands.Cog):
 
     @slash_command(guild_ids=[923611569928147014, 898532471841378334], name="mute", description="Mutes someone from the vc you are currently in, if you are the owner.")
     async def mute(self, ctx, member: Option(discord.Member, "member", required=True)):
+        ENABLED = True # better implementation later
+        if not ENABLED:
+            return await ctx.respond("This command is not enabled in this Guild.")
+
         caller: discord.Member = ctx.author
 
         if caller.voice is not None and isinstance(caller.voice.channel, discord.VoiceChannel):
