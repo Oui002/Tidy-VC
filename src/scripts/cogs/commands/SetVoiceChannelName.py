@@ -17,7 +17,7 @@ class SetVoiceChannelName(commands.Cog):
                 if caller.id == self.client.VoiceChannels[ctx.guild.id][channel.id]["owner"]:
                     if not channel_name in [channel.name for channel in ctx.guild.channels]:
                         await channel.edit(name=channel_name)
-                        await ctx.respond(f"Changed the VoiceChannel's name to {channel_name}")
+                        await ctx.respond(f"Changed the VoiceChannel's name to <#{channel.id}>")
                     
                     else:
                         await ctx.respond("A channel with this name already exists.")

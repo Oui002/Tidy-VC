@@ -12,10 +12,8 @@ class Delete(commands.Cog):
         caller: discord.Member = ctx.author
         if not caller.voice is None and isinstance(caller.voice.channel, discord.VoiceChannel):
             channel: discord.VoiceChannel = caller.voice.channel
-            print(1)
 
             if channel.id in list(self.client.VoiceChannels[ctx.guild.id].keys()):
-                print(2)
                 if caller.id == self.client.VoiceChannels[ctx.guild.id][channel.id]["owner"]:
                     await channel.delete()
                     await ctx.respond("Deleted your custom VoiceChannel.")
