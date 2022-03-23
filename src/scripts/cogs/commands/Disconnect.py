@@ -2,13 +2,13 @@ import discord
 from discord.ext import commands
 from discord.commands import slash_command, Option
 
-class Kick(commands.Cog):
+class Disconnect(commands.Cog):
 
     def __init__(self, client) -> None:
         self.client = client
 
-    @slash_command(guild_ids=[923611569928147014, 898532471841378334], name="kick", description="Kick someone from the vc you are currently in, if you are the owner.")
-    async def kick(self, ctx, member: Option(discord.Member, "member", required=True)):
+    @slash_command(guild_ids=[923611569928147014, 898532471841378334], name="disconnect", description="Disconnect someone from the vc you are currently in, if you are the owner.")
+    async def disconnect(self, ctx, member: Option(discord.Member, "member", required=True)):
         ENABLED = True # better implementation later
         if not ENABLED:
             return await ctx.respond("This command is not enabled in this Guild.")
@@ -35,4 +35,4 @@ class Kick(commands.Cog):
             await ctx.respond("You are not in a VoiceChannel")
     
 def setup(client: commands.Bot):
-    client.add_cog(Kick(client=client))
+    client.add_cog(Disconnect(client=client))
