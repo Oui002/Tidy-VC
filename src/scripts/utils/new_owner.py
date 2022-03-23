@@ -5,10 +5,7 @@ def new_owner(channel: discord.VoiceChannel) -> discord.Member:
     highest_ranking = 0
 
     for member_id in list(hierarchy.keys()):
-        try:
-            if hierarchy[member_id] > highest_ranking:
-                highest_ranking = member_id
-        except:
-            break
+        if hierarchy[member_id] > highest_ranking:
+            highest_ranking = member_id
 
     return discord.utils.find(lambda GuildMember: GuildMember.id == member_id, channel.guild.members)

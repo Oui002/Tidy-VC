@@ -18,7 +18,7 @@ class Delete(commands.Cog):
                 print(2)
                 if caller.id == self.client.VoiceChannels[ctx.guild.id][channel.id]["owner"]:
                     await channel.delete()
-                    await ctx.respond("Deleted your custom VoiceChannel!")
+                    await ctx.respond("Deleted your custom VoiceChannel.")
 
                 else:
                     await ctx.respond("You are not the owner of the VoiceChannel you are currently in.")

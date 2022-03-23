@@ -1,16 +1,16 @@
 import discord
 from discord.ext import commands
-from discord.commands import Option
+from discord.commands import slash_command, Option
 
 class SetVoiceChannelName(commands.Cog):
 
     def __init__(self, client) -> None:
         self.client = client
     
-    @commands.slash_command(guild_ids=[923611569928147014, 898532471841378334], name="name", description="Set the name of your current voice state channel, if you are the owner.")
+    @slash_command(guild_ids=[923611569928147014, 898532471841378334], name="name", description="Set the name of your current voice state channel, if you are the owner.")
     async def name(self, ctx, channel_name: Option(str, "name", required=True)):
         caller: discord.Member = ctx.author
-        if isinstance(caller.voice.channel, discord.VoiceChannel):
+        if caller.voice is not None and isinstance(caller.voice.channel, discord.VoiceChannel):
             channel: discord.VoiceChannel = caller.voice.channel
 
             if channel.id in list(self.client.VoiceChannels[ctx.guild.id].keys()):

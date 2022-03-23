@@ -2,14 +2,13 @@ from discord import Intents
 from discord.ext import commands
 
 from os import listdir
-
 from json import dumps, load
 
 class Cli(commands.Bot):
     
     def __init__(self) -> None:
         self.load_vc_starters()
-        
+
         intents = Intents.default()
         intents.message_content=True
         intents.members=True

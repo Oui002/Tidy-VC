@@ -1,7 +1,6 @@
-import atexit
 from discord.ext import commands
 
-from asyncio import run
+import atexit
 from json import dumps, load
 
 from src.scripts.utils.converters.ID2VoiceChannel import id2vc
