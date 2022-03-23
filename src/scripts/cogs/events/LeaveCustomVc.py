@@ -25,8 +25,7 @@ class LeaveCustomVc(commands.Cog):
                         
                     else:
                         if member.id == self.client.VoiceChannels[guild.id][before.channel.id]["owner"]:
-                            try: self.client.VoiceChannels[guild.id][before.channel.id]["owner"] = new_owner(before.channel).id
-                            except: await before.channel.delete()
+                            self.client.VoiceChannels[guild.id][before.channel.id]["owner"] = new_owner(before.channel).id
 
             except KeyError:
                 pass
