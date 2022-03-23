@@ -20,10 +20,8 @@ class Delete(commands.Cog):
 
                 else:
                     await ctx.respond("You are not the owner of the VoiceChannel you are currently in.")
-
             else:
                 await ctx.respond("The VoiceChannel you are in is not a custom one!")
-
         else:
             await ctx.respond("You are not in a VoiceChannel.")
 
