@@ -26,6 +26,7 @@ class Disconnect(commands.Cog):
 
                 if caller.id == self.client.VoiceChannels[ctx.guild.id][channel.id]["owner"]:
                     await member.move_to(None)
+                    await ctx.respond(f"Disconnected <@{member.id}> from <#{channel.id}>")
 
                 else:
                     await ctx.respond(f"You are not the owner of <#{channel.id}>")

@@ -8,6 +8,7 @@ class GetOwner(commands.Cog):
         self.client = client
     
     @slash_command(guild_ids=[898532471841378334, 923611569928147014])
+    @commands.cooldown(1, 20, commands.BucketType.user)
     async def get_owner(self, ctx, channel: Option(discord.VoiceChannel, "The VoiceChannel", required=True)) -> None:
         return (await ctx.respond(f"<@{self.client.VoiceChannels[channel.guild.id][channel.id]['owner']}> is the current owner of <#{channel.id}>") 
         if channel.id in list(self.client.VoiceChannels[channel.guild.id].keys()) 

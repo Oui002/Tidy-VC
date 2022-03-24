@@ -44,5 +44,9 @@ class CleanUp(commands.Cog):
         await self.job_start()
         atexit.register(self.job_save, args=self.client.VoiceChannels)
 
+    @commands.Cog.listener()
+    async def on_disconnect(self):
+        print("Disconnected from <discord.gateway.DiscordWebSocket object>...")
+
 def setup(client: commands.Bot):
     client.add_cog(CleanUp(client=client))

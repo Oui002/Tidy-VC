@@ -2,6 +2,9 @@ import discord
 from discord.ext import commands
 
 from src.scripts.utils.new_owner import new_owner
+from src.scripts.utils.converters.ID2VoiceChannel import id2vc
+
+from asyncio import sleep
 
 class LeaveCustomVc(commands.Cog):
 
@@ -25,7 +28,9 @@ class LeaveCustomVc(commands.Cog):
                         
                     else:
                         if member.id == self.client.VoiceChannels[guild.id][before.channel.id]["owner"]:
-                            self.client.VoiceChannels[guild.id][before.channel.id]["owner"] = new_owner(before.channel).id
+                            await sleep(300)
+                            if member.voice is None or member.voice.channel.id != before.channel.id:
+                                self.client.VoiceChannels[guild.id][before.channel.id]["owner"] = new_owner(before.channel).id
 
             except KeyError:
                 pass

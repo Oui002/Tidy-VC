@@ -9,7 +9,7 @@ class Mute(commands.Cog):
 
     @slash_command(guild_ids=[923611569928147014, 898532471841378334], name="mute", description="Mutes someone from the vc you are currently in, if you are the owner.")
     async def mute(self, ctx, member: Option(discord.Member, "member", required=True)):
-        ENABLED = True # better implementation later
+        ENABLED = False # better implementation later
         if not ENABLED:
             return await ctx.respond("This command is not enabled in this Guild.")
 
@@ -26,6 +26,7 @@ class Mute(commands.Cog):
 
                 if caller.id == self.client.VoiceChannels[ctx.guild.id][channel.id]["owner"]:
                     await member.edit(mute=True)
+                    await ctx.respond(f"Muted <@{member.id}> in <#{channel.id}>")
 
                 else:
                     await ctx.respond(f"You are not the owner of <#{channel.id}>")
